@@ -14,9 +14,9 @@ public class AddressBookMain {
 
 		do {
 			System.out.println("Enter your choice --->\n");
-			System.out.println("1.Add Contact\n" + "2.Edit Contact\n" +"3 Show Contact\n" + "4.Delete Contact\n" + 
-								"5.Add New Address Book\n"+ "6.Exit\n");
-			
+			System.out.println("1.Add Contact\n" + "2.Edit Contact\n" + "3 Show Contact\n" + "4.Delete Contact\n"
+					+ "5.Add New Addres Book\n" + "6.Select Address Book\n" + "7.Exit\n");
+
 			choice = input.nextInt();
 
 			switch (choice) {
@@ -36,15 +36,17 @@ public class AddressBookMain {
 			case 5:
 				addressBook.addNewAddressBook();
 				break;
-			
 			case 6:
+				addressBook.selectAddressBook();
+				break;
+			case 7:
 				System.out.println("* Successfully Exit *");
 				break;
 			default:
 				System.out.println("Enter Valid Input !!!\n");
 			}
 
-		} while (choice != 6);
+		} while (choice != 7);
 
 	}
 }
