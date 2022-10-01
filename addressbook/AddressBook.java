@@ -1,12 +1,15 @@
 package com.bridgelabz.addressbook;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 public class AddressBook {
 	Contact person = new Contact();
 	public List<Contact> people = new ArrayList<Contact>();
+	static HashMap<String, ArrayList> AddressBookList = new HashMap<String, ArrayList>();
+	static String currentAddressBookName;
 	Scanner sc = new Scanner(System.in);
 
 	public void addContact() {
@@ -15,16 +18,16 @@ public class AddressBook {
 		person.firstName = sc.next();
 
 		System.out.println("Last Name :");
-		person.lastName = sc.nextLine();
+		person.lastName = sc.next();
 
 		System.out.println("Address :");
 		person.address = sc.nextLine();
-
+		sc.next();
 		System.out.println("City :");
-		person.city = sc.nextLine();
+		person.city = sc.next();
 
 		System.out.println("State :");
-		person.state = sc.nextLine();
+		person.state = sc.next();
 
 		System.out.println("Zip :");
 		person.zip = sc.nextInt();
@@ -116,9 +119,9 @@ public class AddressBook {
 
 		System.out.println("Enter the person whose contact to be deleted :");
 		System.out.println("Enter First Name:");
-		String fname = sc.nextLine();
+		String fname = sc.next();
 		System.out.println("Enter Last Name:");
-		String lname = sc.nextLine();
+		String lname = sc.next();
 
 		for (int j = 0; j < people.size(); j++) {
 			Contact person = people.get(j);
@@ -130,6 +133,24 @@ public class AddressBook {
 			}
 		}
 
+	}
+
+	public void addNewAddressBook() {
+		System.out.println("Enter name for AddressBook");
+		String AddressBookName = sc.next();
+		ArrayList<Contact> AddressBook = new ArrayList();
+		AddressBookList.put(AddressBookName, AddressBook);
+		System.out.println("new AddressBook created");
+		people = AddressBookList.get(AddressBookName);
+		currentAddressBookName = AddressBookName;
+	}
+
+	void showContacts(ArrayList addressBook) {
+		System.out.println("Contacts: ");
+		for (Object p : addressBook) {
+			Contact person = (Contact) p;
+			System.out.println(person);
+		}
 	}
 
 }

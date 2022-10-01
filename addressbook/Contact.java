@@ -9,6 +9,18 @@ public class Contact {
 	public String state;
 	public int zip;
 	public String email;
+	
+//		Contact(String firstName, String lastName, long phoneNumber,
+//				String address, String city, String state, int zip, String email){
+//			this.firstName = firstName;
+//			this.lastName = lastName;
+//			this.phoneNumber = phoneNumber;
+//			this.address = address;
+//			this.city = city;
+//			this.state = state;
+//			this.zip = zip;
+//			this.email = email;
+//		}
 
 	public String getFirstName() {
 		return firstName;
@@ -73,4 +85,12 @@ public class Contact {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	@Override
+	public String toString() {
+		return "Contact [firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber
+				+ ", address=" + address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", email=" + email
+				+ "]";
+	}
+	
 }
