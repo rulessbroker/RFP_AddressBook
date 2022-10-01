@@ -15,8 +15,8 @@ public class AddressBookMain {
 		do {
 			System.out.println("Enter your choice --->\n");
 			System.out.println("1.Add Contact\n" + "2.Edit Contact\n" + "3 Show Contact\n" + "4.Delete Contact\n"
-					+ "5.Add New Addres Book\n" + "6.Select Address Book\n" + "7.Check Duplicate Contact\n"
-					+ "8.Exit\n");
+					+ "5.Add New Addres Book\n" + "6.Select Address Book\n" + "7.Check Duplicate Contact\n" + "8.Search Person\n"
+					+ "9.Exit\n");
 
 			choice = input.nextInt();
 
@@ -42,14 +42,18 @@ public class AddressBookMain {
 				break;
 			case 7:
 				addressBook.checkDuplicateContact();
+				break;
 			case 8:
+				addressBook.searchByCityOrState();
+				break;
+			case 9:
 				System.out.println("* Successfully Exit *");
 				break;
 			default:
 				System.out.println("Enter Valid Input !!!\n");
 			}
 
-		} while (choice != 8);
+		} while (choice != 9);
 
 	}
 }
