@@ -12,7 +12,7 @@ public class AddressBook {
 	public void addContact() {
 
 		System.out.println("First Name :");
-		person.firstName = sc.nextLine();
+		person.firstName = sc.next();
 
 		System.out.println("Last Name :");
 		person.lastName = sc.nextLine();
