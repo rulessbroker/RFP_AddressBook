@@ -160,6 +160,21 @@ public class AddressBook {
 
 	}
 
+	public void checkDuplicateContact() {
+		System.out.println("Enter First Name");
+		String fname = sc.nextLine();
+		System.out.println("Enter Last Name");
+		String lname = sc.nextLine();
+		for (int j = 0; j < people.size(); j++) {
+			Contact temp = people.get(j);
+			if (temp.firstName.equals(fname) && temp.lastName.equals(lname)) {
+				System.out.println("Contact already exists!!Please enter a different contact name");
+
+			}
+		}
+
+	}
+
 	void showContacts(ArrayList addressBook) {
 		System.out.println("Contacts: ");
 		for (Object p : addressBook) {
