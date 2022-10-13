@@ -16,7 +16,7 @@ public class AddressBookMain {
 			System.out.println("Enter your choice --->\n");
 			System.out.println("1.Add Contact\n" + "2.Edit Contact\n" + "3.Show Contact\n" + "4.Delete Contact\n"
 					+ "5.Add New Addres Book\n" + "6.Select Address Book\n" + "7.Check Duplicate Contact\n"
-					+ "8.Search Person\n" + "9.Number of Contacts\n" + "10.Exit\n");
+					+ "8.Search Person\n" + "9.Number of Contacts\n" + "10.Sort Contacts\n" + "11.Exit\n");
 
 			choice = input.nextInt();
 
@@ -50,13 +50,16 @@ public class AddressBookMain {
 				addressBook.NoOfContactPersons();
 				break;
 			case 10:
+				addressBook.sortContact();
+				break;
+			case 11:
 				System.out.println("* Successfully Exit *");
 				break;
 			default:
 				System.out.println("Enter Valid Input !!!\n");
 			}
 
-		} while (choice != 10);
+		} while (choice != 11);
 
 	}
 }

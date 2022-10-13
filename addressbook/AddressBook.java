@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBook {
 	Contact person = new Contact();
 	public List<Contact> people = new ArrayList<Contact>();
-	static HashMap<String, ArrayList> AddressBookList = new HashMap<String, ArrayList>();
+	static HashMap<String, ArrayList> addressBookList = new HashMap<String, ArrayList>();
 	static String currentAddressBookName;
 	Scanner sc = new Scanner(System.in);
 
@@ -139,20 +140,20 @@ public class AddressBook {
 		System.out.println("Enter name for AddressBook");
 		String AddressBookName = sc.next();
 		ArrayList<Contact> AddressBook = new ArrayList();
-		AddressBookList.put(AddressBookName, AddressBook);
+		addressBookList.put(AddressBookName, AddressBook);
 		System.out.println("new AddressBook created");
-		people = AddressBookList.get(AddressBookName);
+		people = addressBookList.get(AddressBookName);
 		currentAddressBookName = AddressBookName;
 	}
 
 	void selectAddressBook() {
-		System.out.println(AddressBookList.keySet());
+		System.out.println(addressBookList.keySet());
 		System.out.println("enter name of address book");
 		String addressBookName = sc.next();
 
-		for (String key : AddressBookList.keySet()) {
+		for (String key : addressBookList.keySet()) {
 			if (key.equalsIgnoreCase(addressBookName)) {
-				people = AddressBookList.get(key);
+				people = addressBookList.get(key);
 				currentAddressBookName = key;
 			}
 		}
@@ -212,6 +213,34 @@ public class AddressBook {
 
 		}
 		System.out.println("List of persons in a AdressBook are :" + count);
+	}
+
+	void sortContact() {
+		List<Contact> allContacts = getAllContacts();
+		List<Contact> sortedContacts;
+
+		System.out.println("1.Sort By Name \n2.back");
+		switch (sc.nextInt()) {
+		case 1:
+			sortedContacts = allContacts.stream()
+							.sorted((x, y) -> x.getFirstName().compareTo(y.getFirstName()))
+							.collect(Collectors.toList());
+			sortedContacts.forEach(x -> System.out.println(x));
+			break;
+		case 2:
+			break;
+		default:
+			sortContact();
+			break;
+		}
+	}
+
+	List<Contact> getAllContacts() {
+		List<Contact> allContacts = new ArrayList<>();
+		for (String key : addressBookList.keySet()) {
+			allContacts.addAll(addressBookList.get(key));
+		}
+		return allContacts;
 	}
 
 	void showContacts(ArrayList addressBook) {
