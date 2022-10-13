@@ -11,6 +11,8 @@ public class AddressBook {
 	public List<Contact> people = new ArrayList<Contact>();
 	static HashMap<String, ArrayList> addressBookList = new HashMap<String, ArrayList>();
 	static String currentAddressBookName;
+	 static HashMap<String, ArrayList<Contact>> cityContactList = new HashMap<>();
+	    static HashMap<String, ArrayList<Contact>> stateContactList = new HashMap<>();
 	Scanner sc = new Scanner(System.in);
 
 	public void addContact() {
@@ -215,25 +217,35 @@ public class AddressBook {
 		System.out.println("List of persons in a AdressBook are :" + count);
 	}
 
-	void sortContact() {
-		List<Contact> allContacts = getAllContacts();
-		List<Contact> sortedContacts;
+	 void sortContact() {
+	        List<Contact> allContacts = getAllContacts();
+	        List<Contact> sortedContacts;
 
-		System.out.println("1.Sort By Name \n2.back");
-		switch (sc.nextInt()) {
-		case 1:
-			sortedContacts = allContacts.stream()
-							.sorted((x, y) -> x.getFirstName().compareTo(y.getFirstName()))
-							.collect(Collectors.toList());
-			sortedContacts.forEach(x -> System.out.println(x));
-			break;
-		case 2:
-			break;
-		default:
-			sortContact();
-			break;
-		}
-	}
+	        System.out.println("1.Sort By Name \n2.Sort By CIty \n3.Sort By State \n4.Sort By Zipcode \n5.back");
+	        switch (sc.nextInt()) {
+	            case 1:
+	                sortedContacts = allContacts.stream().sorted((x, y) -> x.getFirstName().compareTo(y.getFirstName())).collect(Collectors.toList());
+	                sortedContacts.forEach(x -> System.out.println(x));
+	                break;
+	            case 2:
+	                sortedContacts = allContacts.stream().sorted((x, y) -> x.getCity().compareTo(y.getCity())).collect(Collectors.toList());
+	                sortedContacts.forEach(x -> System.out.println(x));
+	                break;
+	            case 3:
+	                sortedContacts = allContacts.stream().sorted((x, y) -> x.getState().compareTo(y.getState())).collect(Collectors.toList());
+	                sortedContacts.forEach(x -> System.out.println(x));
+	                break;
+	            case 4:
+	                sortedContacts = allContacts.stream().sorted((x, y) -> Integer.compare(x.getZip(), y.getZip())).collect(Collectors.toList());
+	                sortedContacts.forEach(x -> System.out.println(x));
+	                break;
+	            case 5:
+	                break;
+	            default:
+	                sortContact();
+	                break;
+	        }
+	    }
 
 	List<Contact> getAllContacts() {
 		List<Contact> allContacts = new ArrayList<>();
