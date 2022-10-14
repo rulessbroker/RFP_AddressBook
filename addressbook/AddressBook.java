@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class AddressBook {
 	Contact person = new Contact();
 	public List<Contact> people = new ArrayList<Contact>();
-	static HashMap<String, ArrayList> addressBookList = new HashMap<String, ArrayList>();
+	static HashMap<String, ArrayList<Contact>> addressBookList = new HashMap<>();
 	static String currentAddressBookName;
 	static HashMap<String, ArrayList<Contact>> cityContactList = new HashMap<>();
 	static HashMap<String, ArrayList<Contact>> stateContactList = new HashMap<>();
@@ -272,21 +272,24 @@ public class AddressBook {
 	}
 
 	void readAddressBook() throws FileNotFoundException, SQLException {
-		System.out.println("Select option \n1.read from txt file \n5.back");
-		int option = sc.nextInt();
-		switch (option) {
-		case 1:
-			FileIO.read(new File(FileIO.FILE_PATH.concat("txt//")));
-			break;
-		case 2:
-			break;
-		default:
-			readAddressBook();
+		System.out.println("Select option" + "1.read from txt" + "2.read from csv" + "3.back");
+        int option = sc.nextInt();
+        switch (option) {
+            case 1:
+                FileIO.read(new File(FileIO.FILE_PATH + ("txt//")));
+                break;
+            case 2:
+                FileIO.read(new File(FileIO.FILE_PATH + ("csv//")));
+                break;
+            case 3:
+                break;
+            default:
+                readAddressBook();
 		}
 	}
 
 	void writeAddressBook() throws IOException {
-		System.out.println("Select option \n1.Write to txt file \n2.back");
+		System.out.println("Select option" + "1.Write from txt" + "2.Write from csv" + "3.back");
 		int option = sc.nextInt();
 		switch (option) {
 		case 1:
@@ -294,11 +297,17 @@ public class AddressBook {
 				FileIO.writeTxtFile(addressBookList.get(key), key);
 			}
 			break;
-		case 4:
-			break;
-		default:
-			writeAddressBook();
-			break;
+		 case 2:
+             for (String key : addressBookList.keySet()) {
+                 FileIO.writeCsvFile(addressBookList.get(key), key);
+             }
+             break;
+         case 3:
+             break;
+         default:
+             writeAddressBook();
+             break;
+
 
 		}
 	}
