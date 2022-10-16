@@ -1,5 +1,7 @@
 package com.bridgelabz.addressbook;
 
+import org.json.simple.JsonObject;
+
 public class Contact {
 	public String firstName;
 	public String lastName;
@@ -9,6 +11,18 @@ public class Contact {
 	public String state;
 	public int zip;
 	public String email;
+
+	public Contact(String firstName, String lastName, String address, String city, String state, int zip,
+			long phoneNumber, String email) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -80,5 +94,9 @@ public class Contact {
 				+ ", address=" + address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", email=" + email
 				+ "]";
 	}
-	
+
+	public int compareTo(Object o) {
+		Contact person = (Contact) o;
+		return this.getFirstName().compareTo(person.getFirstName());
+	}
 }

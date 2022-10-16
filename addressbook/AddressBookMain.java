@@ -12,27 +12,29 @@ public class AddressBookMain {
 
 		AddressBook addressBook = new AddressBook();
 		int choice = 0;
+		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 
 		do {
 			System.out.println("Enter your choice --->\n");
-			System.out.println("1.Add Contact\n" + "2.Edit Contact\n" + "3.Show Contact\n" + "4.Delete Contact\n"
-					+ "5.Add New Addres Book\n" + "6.Select Address Book\n" + "7.Check Duplicate Contact\n"
-					+ "8.Search Person\n" + "9.Number of Contacts\n" + "10.Sort Contacts\n" + "11.Write Address Book\n" + "12.Read Address Book\n" + "13.Exit\n");
+			System.out.println("1.Add Contact\n"
+					+ "2.Edit Contact\n" + "3.Show Contact\n" + "4.Delete Contact\n"
+					+ "5.Add New Addres Book\n" + "6.Select Address Book\n" 
+					+ "7.Search Person\n" + "8.Number of Contacts\n" + "9.Sort Contacts\n" + "10.Write Address Book\n" + "11.Read Address Book\n" + "12.Exit\n");
 
 			choice = input.nextInt();
 
 			switch (choice) {
 			case 1:
-				addressBook.addContact();
+				 Contact contact = addressBook.createContact();
+                 addressBook.addContact(contact);
 				break;
 			case 2:
 				addressBook.editContact();
 				break;
 			case 3:
-				addressBook.showContacts((ArrayList) addressBook.people);
-				System.out.println(addressBook.people);
-				break;
+				 addressBook.viewContacts();
+				 break;
 			case 4:
 				addressBook.deleteContact();
 				break;
@@ -43,31 +45,28 @@ public class AddressBookMain {
 				addressBook.selectAddressBook();
 				break;
 			case 7:
-				addressBook.checkDuplicateContact();
+				addressBook.searchContact();
 				break;
 			case 8:
-				addressBook.searchByCityOrState();
+				addressBook.showContactCount();
 				break;
 			case 9:
-				addressBook.NoOfContactPersons();
-				break;
-			case 10:
 				addressBook.sortContact();
 				break;
-			case 11:
+			case 10:
 				addressBook.writeAddressBook();
 				break;
-			case 12:
+			case 11:
 				addressBook.readAddressBook();
 				break;
-			case 13:
+			case 12:
 				System.out.println("* Successfully Exit *");
 				break;
 			default:
 				System.out.println("Enter Valid Input !!!\n");
 			}
 
-		} while (choice != 11);
+		} while (choice != 12);
 
 	}
 }

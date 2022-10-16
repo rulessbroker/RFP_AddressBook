@@ -10,11 +10,12 @@ import java.util.Scanner;
 
 import org.json.simple.JsonObject;
 
+import com.google.gson.Gson;
+import com.mysql.cj.xdevapi.JsonString;
 import com.opencsv.CSVWriter;
 
 public class FileIO {
-	static final File FILE_PATH = new File(
-			"C:\\Users\\ADMIN\\eclipse-workspace\\RFP_AddressBook\\src\\com\\bridgelabz\\Files");
+	static final String FILE_PATH = System.getProperty("user.dir").concat("//Files//");
 	static Scanner sc = new Scanner(System.in);
 
 	public enum FileType {
@@ -32,10 +33,10 @@ public class FileIO {
 		return true;
 	}
 
-	static boolean writeTxtFile(ArrayList<Contact> addressBook, String addressBookName) throws IOException {
+	static boolean writeTxtFile(ArrayList<Contact> contacts, String addressBookName) throws IOException {
 		System.out.println("Enter file name - ");
 		addressBookName = sc.next();
-		File file = new File(FILE_PATH + "txt//" + addressBookName + ".txt");
+		File file = new File("Files//text.txt");
 		boolean isCreated = file.createNewFile();
 		if (!isCreated) {
 			file.delete();
@@ -44,7 +45,7 @@ public class FileIO {
 		System.out.println("file created");
 		FileWriter fileWriter = new FileWriter(file);
 		String data = "";
-		for (Contact contactPerson : addressBook) {
+		for (Contact contactPerson : contacts) {
 			data = data.concat(contactPerson.toString()).concat("\n");
 		}
 		System.out.println(data);
@@ -53,10 +54,10 @@ public class FileIO {
 		return true;
 	}
 
-	public static boolean writeCsvFile(ArrayList<Contact> addressBook, String addressBookName) throws IOException {
+	public static boolean writeCsvFile(ArrayList<Contact> contacts, String addressBookName) throws IOException {
 		System.out.println("Enter file name - ");
 		addressBookName = sc.next();
-		File file = new File(FILE_PATH + "csv//" + addressBookName + ".csv");
+		File file = new File("Files//csv.csv");
 		boolean isCreated = file.createNewFile();
 		if (!isCreated) {
 			file.delete();
@@ -66,7 +67,7 @@ public class FileIO {
 		FileWriter fileWriter = new FileWriter(file);
 		try (CSVWriter csvWriter = new CSVWriter(fileWriter)) {
 			List<String[]> data = new ArrayList<>();
-			for (Contact person : addressBook) {
+			for (Contact person : contacts) {
 				String[] contactData = new String[] { person.getFirstName(), person.getLastName(), person.getAddress(),
 						person.getCity(), person.getState(), String.valueOf(person.getZip()),
 						String.valueOf(person.getPhoneNumber()), person.getEmail() };
@@ -78,19 +79,17 @@ public class FileIO {
 		return true;
 	}
 
-}
-
-	public static void writeJsonFile(ArrayList<Contact> addressBook, String addressBookName) throws IOException {
-		File file = new File(FILE_PATH + "json//" + addressBookName + ".json");
+	public static void writeJsonFile(ArrayList<Contact> contacts, String addressBookName) throws IOException {
+		File file = new File("Files//json.json");
 		boolean isCreated = file.createNewFile();
 		if (!isCreated) {
 			file.delete();
 			file.createNewFile();
 		}
 		FileWriter writer = new FileWriter(file);
-		JsonObject gson = new JsonObject();
+		Gson gson = new Gson();
 		String data = "";
-		for (Contact person : addressBook) {
+		for (Contact person : contacts) {
 			data = data.concat(gson.toJson(person) + "\n");
 		}
 		writer.write(data);
